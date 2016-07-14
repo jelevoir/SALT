@@ -5,11 +5,18 @@ import (
 )
 
 func main() {
-	config, _ := LoadConfig("twitterconfig.json")
-	api := NewTwitter(config)
+	twitterconfig, _ := LoadTwitterConfig("twitterconfig.json")
+	api := NewTwitter(twitterconfig)
+
+	postgresqlconfig, _ := LoadPostgreSQLConfig("postgresql.json")
+	db, err := NewDatabase(postgresqlconfig)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	searchResult, _ := api.GetSearch("golang", nil)
-	for _, tweet := range searchResult.Statuses {
-		fmt.Println(tweet.Text)
+	err = InsertTweet(db, searchResult.Statuses)
+	if err != nil {
+		fmt.Println(err)
 	}
 }

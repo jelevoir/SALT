@@ -12,7 +12,7 @@ type TwitterConfig struct {
 	ConsumerSecret string
 }
 
-func LoadConfig(filename string) (TwitterConfig, error) {
+func LoadTwitterConfig(filename string) (TwitterConfig, error) {
 	tc := TwitterConfig{}
 
 	file, err := os.Open(filename)
