@@ -119,7 +119,7 @@ func InsertWord(db *sql.DB, data []Word) error {
 }
 
 func NewDatabase(config PostgresConfig) (*sql.DB, error) {
-	dbUrl := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", config.Username, config.Password, config.Host, config.Dbname)
+	dbUrl := fmt.Sprintf("postgres://%s:%s@%s:%v/%s?sslmode=disable", config.Username, config.Password, config.Host, config.Port, config.Dbname)
 	db, err := sql.Open("postgres", dbUrl)
 	if err != nil {
 		return nil, err
