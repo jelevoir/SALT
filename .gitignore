@@ -35,3 +35,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+
+twitterconfig.json
