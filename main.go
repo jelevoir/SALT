@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+    "net/url"
 )
 
 func main() {
@@ -14,7 +15,14 @@ func main() {
 		fmt.Println(err)
 	}
 
-	searchResult, _ := api.GetSearch("golang", nil)
+    // Implements location specific tweet
+    v := url.Values{}
+    v.Add("geocode","42.6725469,-83.2170434,5mi")
+    v.Add("lang","en")
+	searchResult, _ := api.GetSearch("OU", v)
+//    for _, []tweet := range searchResult.Statuses {
+
+//    }
 	err = InsertTweet(db, searchResult.Statuses)
 	if err != nil {
 		fmt.Println(err)
