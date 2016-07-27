@@ -20,9 +20,15 @@ func main() {
     v.Add("geocode","42.6725469,-83.2170434,5mi")
     v.Add("lang","en")
 	searchResult, _ := api.GetSearch("OU", v)
-//    for _, []tweet := range searchResult.Statuses {
 
-//    }
+    // Get API key
+    key := GetAPIKey()
+
+    for _, tweet := range searchResult.Statuses {
+        sentiment := GetSentiment(key, tweet.Text)
+        fmt.Println(tweet.Text)
+        fmt.Println(sentiment.Sentiment.Polarity)
+    }
 	err = InsertTweet(db, searchResult.Statuses)
 	if err != nil {
 		fmt.Println(err)
